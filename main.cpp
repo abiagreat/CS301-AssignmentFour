@@ -12,11 +12,11 @@ int main() {
     ofstream outputFile;
     char command = 'I';     // operation to be executed. initialized to 'I' as a dummy place-holder
 
-    cout << "Enter the name of the input file: ";
+    cout << "Enter the name of the input file (hint: it's Grades.trn): ";
     cin >> inputFileName;
     inputFile.open(inputFileName.c_str());
 
-    cout << "Enter the name of the output file: ";
+    cout << "Enter the name of the output file (hint: it's Grades.dat): ";
     cin >> outputFileName;
     outputFile.open(outputFileName.c_str());
 
@@ -24,6 +24,9 @@ int main() {
         cout << "I/O error. Can't find the input file! \n";
         exit(2);
     }
+
+    // test output file
+    outputFile << "*** Semester Grade Book ***" << endl << endl;
 
     while (command != 'Q') {
         // define variables that will be used under the scope of this while loop
@@ -45,31 +48,41 @@ int main() {
             switch (command) {
                 case 'S':
                 case 's':
-                    cout << "You have selcted to set up for a new semester." << endl;
+                    cout << "*** You have selected to set up for a new semester. ***" << endl;
+                    outputFile << "Initializing data for a new semester... " << endl;
+
+
                     // define variables
                     int numAssignments, numTests, numFinalExams;
                     float assignmentWeight, testWeight, examWeight;
+
 
                     // prompt the user for int values
                     cout << "Enter the number of semester assignments: ";
                     cin >> numAssignments;
                     while (numAssignments < 0 || numAssignments > 6) {
-                        cout << "You must enter a number between 0 and 6. Enter the number of semester assignments: ";
+                        cout << "!! Error: You must enter a number between 0 and 6. Enter the number of semester assignments: " << endl;
                         cin >> numAssignments;
                     }
+                    outputFile << "Number of assignments this semester: " << numAssignments << endl;
+
                     cout << "Enter the number of tests: ";
                     cin >> numTests;
                     while (numTests < 0 || numTests > 4) {
-                        cout << "You must enter a number between 0 and 4. Enter the number of semester assignments: ";
+                        cout << "!! Error: You must enter a number between 0 and 4. Enter the number of semester assignments: " << endl;
                         cin >> numTests;
                     }
-                    cout << "Enter the number of exams: ";
+                    outputFile << "Number of tests this semester: " << numTests << endl;
+
+                    cout << "Enter the number of final exams: ";
                     cin >> numFinalExams;
                     while (numFinalExams < 0 || numFinalExams > 1) {
-                        cout << "You must enter either 0 or 1. Enter the number of semester assignments: ";
+                        cout << "!! Error: You must enter either 0 or 1. Enter the number of semester assignments: " << endl;
                         cin >> numFinalExams;
                     }
-                    // prompt user for float values
+                    outputFile << "Number of final exams this semester: " << numFinalExams << endl;
+
+                    // prompt the user for float values
                     cout << "Enter the relative weight of assignments as a decimal: ";
                     cin >> assignmentWeight;
                     cout << "Enter the relative weight of tests as a decimal: ";
@@ -77,9 +90,8 @@ int main() {
                     cout << "Enter the relative weight of the final exam as a decimal: ";
                     cin >> examWeight;
                     while (assignmentWeight + testWeight + examWeight != 1.0) {
-                        cout
-                                << "The sum total of your relative weights must equal 1.0. The sum of your relative weights"
-                                   "does not equal zero. Try again.";
+                        cout << "!!!!! Error: The sum total of your relative weights must equal 1.0. " << endl << "The sum of your relative weights "
+                        << "does not equal zero. Try again." << endl;
                         cout << "Enter the relative weight of assignments as a decimal: ";
                         cin >> assignmentWeight;
                         cout << "Enter the relative weight of tests as a decimal: ";
@@ -87,6 +99,9 @@ int main() {
                         cout << "Enter the relative weight of the final exam as a decimal: ";
                         cin >> examWeight;
                     }
+                    outputFile << "Assignment weight: " << assignmentWeight << endl;
+                    outputFile << "Test weight: " << assignmentWeight << endl;
+                    outputFile << "Exam weight: " << examWeight << endl;
                     break;
                 case 'A':
                 case 'a':
@@ -129,6 +144,7 @@ int main() {
                 case 'F':
                 case 'f':
                     cout << endl << "*** You have selected to record final exam grades for all students. ***" << endl;
+
                     break;
                 case 'C':
                 case 'c':
