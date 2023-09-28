@@ -351,16 +351,33 @@ int main() {
             case 'q':
                 string line;
                 cout << endl << "*** You have selected to quit the program. ***" << endl;
-                // save information onto Grades.trn by copying each line of Grades.dat onto Grades.trn
-                cout << "Saving your sessions data. please don't stop the program." << endl;
-                while (getline(inputFile, line)) {
-                    outputFile << line << endl;
-                }
-                cout << "Your data has been saved onto your grade book. Program will now close." << endl;
 
-                displayCommandMenu = 0;
+                // Save all student records to "Grades.dat"
+                ofstream outputFile("Grades.dat");
+
+                if (!outputFile.is_open()) {
+                    cout << "Error: Unable to open Grades.dat for writing." << endl;
+                    break;
+                }
+
+                // Write student records to the "Grades.dat" file
+                for (const Student& student : students) {
+                    outputFile << "Name: " << student.GetName() << endl;
+                    outputFile << "ID Number: " << student.GetIDNumber() << endl;
+
+                    // You can add more code here to save other student data (grades, etc.)
+
+                    outputFile << endl;
+                }
+
+                cout << "Student records have been saved to Grades.dat." << endl;
+
+                outputFile.close();
+
+                displayCommandMenu = 0; // Exit the program
                 break;
         }
     }
     return 0;
 }
+
