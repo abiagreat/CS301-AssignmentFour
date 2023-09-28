@@ -1,6 +1,9 @@
-//
-// Created by Mario Salinas and Abia Khan
-//
+//Team 3: Abia Khan and Mario Salinas
+//NetID: ac6212 and ry7931 
+//CS 301-03 
+//9/26/23 
+
+
 #include <iostream>
 #include <fstream>
 #include <string>
