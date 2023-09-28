@@ -10,7 +10,8 @@ int main() {
     string inputFileName, outputFileName;
     ifstream inputFile;
     ofstream outputFile;
-    char command = 'I';     // operation to be executed. initialized to 'I' as a dummy place-holder
+    int displayCommandMenu = 1;    // chose whether to display the processing commands menu
+    char command = 'I';         // operation to be executed. initialized to 'I' as a dummy place-holder
 
     cout << "Enter the name of the input file (hint: it's Grades.trn): ";
     cin >> inputFileName;
@@ -28,7 +29,7 @@ int main() {
     // test output file
     outputFile << "*** Semester Grade Book ***" << endl << endl;
 
-    while (command != 'Q') {
+    while (displayCommandMenu != 0) {
         // define variables that will be used under the scope of this while loop
         string studentName;
 
@@ -44,126 +45,175 @@ int main() {
              << "Enter your single letter-command: " << endl;
         cin >> command;
 
-        if (command != 'Q') {
-            switch (command) {
-                case 'S':
-                case 's':
-                    cout << "*** You have selected to set up for a new semester. ***" << endl;
-                    outputFile << "Initializing data for a new semester... " << endl;
+        switch (command) {
+            case 'S':
+            case 's':
+                cout << "*** You have selected to set up for a new semester. ***" << endl;
+                outputFile << "Initializing data for a new semester... " << endl;
 
 
-                    // define variables
-                    int numAssignments, numTests, numFinalExams;
-                    float assignmentWeight, testWeight, examWeight;
+                // define variables
+                int numAssignments, numTests, numFinalExams;
+                float assignmentWeight, testWeight, examWeight;
 
 
-                    // prompt the user for int values
-                    cout << "Enter the number of semester assignments: ";
+                // prompt the user for int values
+                cout << "Enter the number of semester assignments: ";
+                cin >> numAssignments;
+                while (numAssignments < 0 || numAssignments > 6) {
+                    cout << "!! Error: You must enter a number between 0 and 6. Enter the number of semester assignments: " << endl;
                     cin >> numAssignments;
-                    while (numAssignments < 0 || numAssignments > 6) {
-                        cout << "!! Error: You must enter a number between 0 and 6. Enter the number of semester assignments: " << endl;
-                        cin >> numAssignments;
-                    }
-                    outputFile << "Number of assignments this semester: " << numAssignments << endl;
+                }
+                outputFile << "Number of assignments this semester: " << numAssignments << endl;
 
-                    cout << "Enter the number of tests: ";
+                cout << "Enter the number of tests: ";
+                cin >> numTests;
+                while (numTests < 0 || numTests > 4) {
+                    cout << "!! Error: You must enter a number between 0 and 4. Enter the number of semester assignments: " << endl;
                     cin >> numTests;
-                    while (numTests < 0 || numTests > 4) {
-                        cout << "!! Error: You must enter a number between 0 and 4. Enter the number of semester assignments: " << endl;
-                        cin >> numTests;
-                    }
-                    outputFile << "Number of tests this semester: " << numTests << endl;
+                }
+                outputFile << "Number of tests this semester: " << numTests << endl;
 
-                    cout << "Enter the number of final exams: ";
+                cout << "Enter the number of final exams: ";
+                cin >> numFinalExams;
+                while (numFinalExams < 0 || numFinalExams > 1) {
+                    cout << "!! Error: You must enter either 0 or 1. Enter the number of semester assignments: " << endl;
                     cin >> numFinalExams;
-                    while (numFinalExams < 0 || numFinalExams > 1) {
-                        cout << "!! Error: You must enter either 0 or 1. Enter the number of semester assignments: " << endl;
-                        cin >> numFinalExams;
-                    }
-                    outputFile << "Number of final exams this semester: " << numFinalExams << endl;
+                }
+                outputFile << "Number of final exams this semester: " << numFinalExams << endl;
 
-                    // prompt the user for float values
+                // prompt the user for float values
+                cout << "Enter the relative weight of assignments as a decimal: ";
+                cin >> assignmentWeight;
+                cout << "Enter the relative weight of tests as a decimal: ";
+                cin >> testWeight;
+                cout << "Enter the relative weight of the final exam as a decimal: ";
+                cin >> examWeight;
+                while (assignmentWeight + testWeight + examWeight != 1.0) {
+                    cout << "!! Error: The sum total of your relative weights must equal 1.0. " << endl << "The sum of your relative weights "
+                    << "does not equal zero. Try again." << endl;
                     cout << "Enter the relative weight of assignments as a decimal: ";
                     cin >> assignmentWeight;
                     cout << "Enter the relative weight of tests as a decimal: ";
                     cin >> testWeight;
                     cout << "Enter the relative weight of the final exam as a decimal: ";
                     cin >> examWeight;
-                    while (assignmentWeight + testWeight + examWeight != 1.0) {
-                        cout << "!!!!! Error: The sum total of your relative weights must equal 1.0. " << endl << "The sum of your relative weights "
-                        << "does not equal zero. Try again." << endl;
-                        cout << "Enter the relative weight of assignments as a decimal: ";
-                        cin >> assignmentWeight;
-                        cout << "Enter the relative weight of tests as a decimal: ";
-                        cin >> testWeight;
-                        cout << "Enter the relative weight of the final exam as a decimal: ";
-                        cin >> examWeight;
-                    }
-                    outputFile << "Assignment weight: " << assignmentWeight << endl;
-                    outputFile << "Test weight: " << assignmentWeight << endl;
-                    outputFile << "Exam weight: " << examWeight << endl;
-                    break;
-                case 'A':
-                case 'a':
-                    int studentIDNumber;
-                    cout << endl << "*** You have selected to add a new student. ***" << endl;
+                }
+                outputFile << "Assignment weight: " << assignmentWeight << endl;
+                outputFile << "Test weight: " << assignmentWeight << endl;
+                outputFile << "Exam weight: " << examWeight << endl;
+
+
+                cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
+                cin >> displayCommandMenu;
+                break;
+            case 'A':
+            case 'a': {
+                // i use brackets here so that the program will allow me to initialize my integer variables
+                // inside of this case
+                cout << endl << "*** You have selected to add a new student. ***" << endl;
+                outputFile << endl << "Initializing student data..." << endl;
+
+                int studentIDNumber;
+                int repeatSwitchCase = 1;
+                while (repeatSwitchCase != 0) {
                     cin.ignore();
                     cout << "Enter the student's first and last name seperated by a space: ";
                     getline(cin, studentName);
                     cout << "Enter the student's ID number: ";
                     cin >> studentIDNumber;
-                    break;
-                case 'P':
-                case 'p':
-                    cout << endl << "*** You have selected to record assignment grades for all students. ***" << endl;
-                    break;
-                case 'T':
-                case 't': {
-                    // i use brackets here so that the program will allow me to initialize my integer variables
-                    // inside of this case
-                    int testNumber;
-                    int repeatSwitchCase = 1;
-                    cout << endl << "*** You have selected to record test grades for all students. ***" << endl;
-                    while (repeatSwitchCase != 0) {
-                        cout << "Enter the test number for which you will enter a grade: ";
-                        cin >> testNumber;
-                        // verify that the user entered a valid test number. a valid test number is
-                        // one that is less than numTest, and that has not been previously recorded
-                        while (testNumber > numTests || testNumber < 0) {
-                            cout << "Invalid test number. You cannot input a number less than zero or a number " << endl
-                                 << "greater than the number of tests you have assigned to your students. Try again."
-                                 << endl;
-                            cout << "Enter the testNumber for which you will enter a grade: ";
-                            cin >> testNumber;
-                        }
-                        cout << "Enter the score for a different number? Enter 1 if yes and 0 if no: ";
-                        cin >> repeatSwitchCase;
-                    }
-                    break;
+
+                    outputFile << "Student name: " << studentName << endl;
+                    outputFile << "Student ID number: " << studentIDNumber << endl;
+
+                    cout << "Enter another student name? Enter 1 for yes or 0 for no: ";
+                    cin >> repeatSwitchCase;
                 }
-                case 'F':
-                case 'f':
-                    cout << endl << "*** You have selected to record final exam grades for all students. ***" << endl;
 
-                    break;
-                case 'C':
-                case 'c':
-                    cout << endl << "*** You have selected to change a grade for a particular student. ***" << endl;
-                    break;
-                case 'G':
-                case 'g':
-                    cout << endl << "*** You have selected to calculate students' final grade. ***" << endl;
-                    break;
-                case 'O':
-                case 'o':
-                    cout << endl << "*** You have selected to output the grade data. ***" << endl;
-                    break;
-                case 'Q':
-                case 'q':
-                    cout << endl << "*** You have selected to quit the program. ***" << endl;
-                    break;
-
+                cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
+                cin >> displayCommandMenu;
+                break;
             }
+            case 'P':
+            case 'p':
+                cout << endl << "*** You have selected to record assignment grades for all students. ***" << endl;
+
+                cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
+                cin >> displayCommandMenu;
+                break;
+            case 'T':
+            case 't': {
+                // i use brackets here so that the program will allow me to initialize my integer variables
+                // inside of this case
+                int testNumber;
+                int repeatSwitchCase = 1;
+                cout << endl << "*** You have selected to record test grades for all students. ***" << endl;
+                while (repeatSwitchCase != 0) {
+                    cout << "Enter the test number for which you will enter a grade: ";
+                    cin >> testNumber;
+                    // verify that the user entered a valid test number. a valid test number is
+                    // one that is less than numTest, and that has not been previously recorded
+                    while (testNumber > numTests || testNumber < 0) {
+                        cout << "!! Error: Invalid test number. You cannot input a number less than zero or a number " << endl
+                             << "greater than the number of tests you have assigned to your students. Try again."
+                             << endl;
+                        cout << "Enter the testNumber for which you will enter a grade: ";
+                        cin >> testNumber;
+                    }
+                    cout << "Enter the score for a different number? Enter 1 if yes and 0 if no: ";
+                    cin >> repeatSwitchCase;
+                }
+
+
+                cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
+                cin >> displayCommandMenu;
+                break;
+            }
+            case 'F':
+            case 'f':
+                cout << endl << "*** You have selected to record final exam grades for all students. ***" << endl;
+
+
+                cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
+                cin >> displayCommandMenu;
+                break;
+            case 'C':
+            case 'c':
+                cout << endl << "*** You have selected to change a grade for a particular student. ***" << endl;
+
+
+                cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
+                cin >> displayCommandMenu;
+                break;
+            case 'G':
+            case 'g':
+                cout << endl << "*** You have selected to calculate students' final grade. ***" << endl;
+
+
+                cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
+                cin >> displayCommandMenu;
+                break;
+            case 'O':
+            case 'o':
+                cout << endl << "*** You have selected to output the grade data. ***" << endl;
+
+
+                cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
+                cin >> displayCommandMenu;
+                break;
+            case 'Q':
+            case 'q':
+                string line;
+                cout << endl << "*** You have selected to quit the program. ***" << endl;
+                // save information onto Grades.trn by copying each line of Grades.dat onto Grades.trn
+                cout << "Saving your sessions data. please don't stop the program." << endl;
+                while (getline(inputFile, line)) {
+                    outputFile << line << endl;
+                }
+                cout << "Your data has been saved onto your grade book. Program will now close." << endl;
+
+                displayCommandMenu = 0;
+                break;
         }
     }
 
