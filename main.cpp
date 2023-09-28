@@ -256,12 +256,37 @@ int main() {
                         }
             case 'G':
             case 'g':
-                cout << endl << "*** You have selected to calculate students' final grade. ***" << endl;
+    cout << endl << "*** You have selected to calculate students' final grade. ***" << endl;
 
+    // Loop through each student and calculate the final grade.
+    for (int studentIndex = 0; studentIndex < numberOfStudents; studentIndex++) {
+        // Initialize variables to store the sum of program and test grades.
+        int programSum = 0;
+        int testSum = 0;
 
-                cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
-                cin >> displayCommandMenu;
-                break;
+        // Calculate the sum of program grades.
+        for (int programIndex = 0; programIndex < numAssignments; programIndex++) {
+            programSum += students[studentIndex].programGrades[programIndex];
+        }
+
+        // Calculate the sum of test grades.
+        for (int testIndex = 0; testIndex < numTests; testIndex++) {
+            testSum += students[studentIndex].testGrades[testIndex];
+        }
+
+        // Calculate the final grade as the weighted sum of program and test grades.
+        float finalGrade = (programSum * assignmentWeight + testSum * testWeight) * 100;
+
+        // Store the final grade in the student's record.
+        students[studentIndex].finalGrade = finalGrade;
+    }
+
+    cout << "Final grades have been calculated and stored for all students." << endl;
+
+    cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
+    cin >> displayCommandMenu;
+    break;
+
             case 'O':
             case 'o':
                 cout << endl << "*** You have selected to output the grade data. ***" << endl;
