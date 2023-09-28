@@ -136,11 +136,37 @@ int main() {
             }
             case 'P':
             case 'p':
-                cout << endl << "*** You have selected to record assignment grades for all students. ***" << endl;
+                {
+              cout << endl << "*** You have selected to record programming assignment grades for all students. ***" << endl;
 
+             // Add code here to prompt the user for the program number to be recorded.
+            int programNumber;
+            cout << "Enter the program number to be recorded: ";
+            cin >> programNumber;
+
+            // Verify that the entered program number is valid.
+            while (programNumber >= numAssignments || programNumber < 0) {
+                cout << "!! Error: Invalid program number. Enter a valid program number: ";
+                cin >> programNumber;
+                }
+    
+            // Now, loop through each student and record their grade for the selected program.
+            for (int studentIndex = 0; studentIndex < numberOfStudents; studentIndex++) {
+            // Prompt for the student's grade for the specified program.
+                int programGrade;
+                cout << "Enter the grade for " << students[studentIndex].studentName << " for program " << programNumber << ": ";
+                cin >> programGrade;
+
+                 // Assign the grade to the appropriate student's record.
+                students[studentIndex].programGrades[programNumber] = programGrade;
+                }
+
+                cout << "Programming assignment grades have been recorded for all students." << endl;
+        
                 cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
                 cin >> displayCommandMenu;
                 break;
+            }
             case 'T':
             case 't': {
                 // i use brackets here so that the program will allow me to initialize my integer variables
