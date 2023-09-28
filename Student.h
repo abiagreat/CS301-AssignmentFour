@@ -14,22 +14,24 @@ private:
     int arraySize;
     string studentName;
     int studentIDNumber;
-    int studentAssignmentScores[arraySize];
-    int studentTestScores[arraySize];
-    int studentFinalExamScores[arraySize];
+    // from stack overflow: "If you do want a variable-sized array, then the standard way of doing
+    // this is to use heap allocation. In other words, you need to declare studentAssignmentScores to be a pointer
+    // to an integer array, which you will allocate during runtime."
+    int *studentAssignmentScores = new int[arraySize];
+    int *studentTestScores = new int[arraySize];
+    int *studentFinalExamScores = new int[arraySize];
 public:
     Student();
     void PutName(string);
     void PutIDNumber(int);
-    void PutAssignmentScores(int, int);
-    void PutTestScores(int, int);
-    void PutFinalExamScores(int, int);
+    void PutAssignmentScores(int, int, int);
+    void PutTestScores(int, int, int);
+    void PutFinalExamScores(int, int, int);
     string GetName();
     int GetIDNumber();
     int GetAssignmentScore(int, int);
     int GetTestScores(int);
     int GetFinalExamScores(int);
 };
-
 
 #endif //CS301_ASSIGNMENTFOUR_STUDENT_H
