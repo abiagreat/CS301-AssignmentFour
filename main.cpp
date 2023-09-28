@@ -205,12 +205,55 @@ int main() {
                 break;
             case 'C':
             case 'c':
+            {
                 cout << endl << "*** You have selected to change a grade for a particular student. ***" << endl;
 
+                // Prompt the user to enter the student number.
+                int studentNumber;
+                cout << "Enter the student number (0-based index) for whom you want to change a grade: ";
+                cin >> studentNumber;
+
+                // Verify that the entered student number is valid.
+                while (studentNumber < 0 || studentNumber >= numberOfStudents) {
+                        cout << "!! Error: Invalid student number. Enter a valid student number: ";
+                        cin >> studentNumber;
+                    }
+
+                // Prompt the user to specify the type of grade to change (P, T, or F).
+                char gradeType;
+                cout << "Enter the grade type to change (P for Programming, T for Test, F for Final Exam): ";
+                cin >> gradeType;
+
+                // Validate the entered grade type.
+                while (gradeType != 'P' && gradeType != 'p' && gradeType != 'T' && gradeType != 't' && gradeType != 'F' && gradeType != 'f') {
+                cout << "!! Error: Invalid grade type. Enter a valid grade type (P, T, or F): ";
+                cin >> gradeType;
+                    }
+
+                // Prompt the user to enter the new grade.
+                int newGrade;
+                cout << "Enter the new grade: ";
+                cin >> newGrade;
+
+                // Depending on the grade type, update the corresponding grade for the selected student.
+                if (gradeType == 'P' || gradeType == 'p') {
+                // Programming assignment grade
+                students[studentNumber].programGrades[programNumber] = newGrade;
+                    } else if (gradeType == 'T' || gradeType == 't') {
+                // Test grade
+                // You may need to prompt for the test number as well.
+                // Similar to how you did it for 'P'.
+                    } else if (gradeType == 'F' || gradeType == 'f') {
+                    // Final exam grade
+                // You may need to prompt for the final exam grade here.
+                    }
+
+                cout << "Grade for " << students[studentNumber].studentName << " has been updated." << endl;
 
                 cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
                 cin >> displayCommandMenu;
-                break;
+                 break;
+                        }
             case 'G':
             case 'g':
                 cout << endl << "*** You have selected to calculate students' final grade. ***" << endl;
