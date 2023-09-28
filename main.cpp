@@ -1,16 +1,18 @@
 //
-// Created by Mario O Salinas on 9/27/23.
+// Created by Mario Salinas and Abia Khan
 //
 #include <iostream>
 #include <fstream>
 #include <string>
 using namespace std;
 
+#include "Student.h"
+
 int main() {
     string inputFileName, outputFileName;
     ifstream inputFile;
     ofstream outputFile;
-    int displayCommandMenu = 1;    // chose whether to display the processing commands menu
+    int displayCommandMenu = 1;    // choose whether to display the processing commands menu
     char command = 'I';         // operation to be executed. initialized to 'I' as a dummy place-holder
 
     cout << "Enter the name of the input file (hint: it's Grades.trn): ";
@@ -173,6 +175,8 @@ int main() {
                 // inside of this case
                 int testNumber;
                 int repeatSwitchCase = 1;
+
+
                 cout << endl << "*** You have selected to record test grades for all students. ***" << endl;
                 while (repeatSwitchCase != 0) {
                     cout << "Enter the test number for which you will enter a grade: ";
@@ -310,5 +314,5 @@ int main() {
                 break;
         }
     }
-
+    return 0;
 }
