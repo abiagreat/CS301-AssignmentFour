@@ -4,9 +4,22 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
+#include <algorithm> // for sorting
+
 using namespace std;
 
 #include "Student.h"
+
+// Function to compare students by name for sorting
+bool CompareStudentsByName(const Student& a, const Student& b) {
+    return a.GetName() < b.GetName();
+}
+
+// Function to compare students by ID for sorting
+bool CompareStudentsByID(const Student& a, const Student& b) {
+    return a.GetIDNumber() < b.GetIDNumber();
+}
 
 int main() {
     string inputFileName, outputFileName;
@@ -290,14 +303,49 @@ int main() {
     cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
     cin >> displayCommandMenu;
     break;
-
             case 'O':
             case 'o':
                 cout << endl << "*** You have selected to output the grade data. ***" << endl;
 
+                // Open the "Grades.out" file for writing
+                ofstream outFile("Grades.out");
 
-                cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
-                cin >> displayCommandMenu;
+                if (!outFile.is_open()) {
+                    cout << "Error: Unable to open Grades.out for writing." << endl;
+                    break;
+                }
+
+                // Sort the students based on user choice (name or ID)
+                char sortChoice;
+                cout << "Sort by (N)ame or (I)D? ";
+                cin >> sortChoice;
+
+                if (sortChoice == 'N' || sortChoice == 'n') {
+                    // Sort by name
+                    sort(students.begin(), students.end(), CompareStudentsByName);
+                } else if (sortChoice == 'I' || sortChoice == 'i') {
+                    // Sort by ID
+                    sort(students.begin(), students.end(), CompareStudentsByID);
+                } else {
+                    cout << "Invalid choice. Sorting by name by default." << endl;
+                    sort(students.begin(), students.end(), CompareStudentsByName);
+                }
+
+                // Output the sorted data to "Grades.out"
+                outFile << "*** Sorted Semester Grade Book ***" << endl << endl;
+
+                for (const Student& student : students) {
+                    outFile << "Name: " << student.GetName() << endl;
+                    outFile << "ID Number: " << student.GetIDNumber() << endl;
+
+                    // You can add more code here to output other student data (grades, etc.)
+
+                    outFile << endl;
+                }
+
+                cout << "Grade data has been written to Grades.out." << endl;
+
+                outFile.close();
                 break;
             case 'Q':
             case 'q':
