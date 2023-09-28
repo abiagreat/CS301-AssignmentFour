@@ -27,11 +27,12 @@ public:
     string GetName();
     int GetIDNumber();
     int GetAssignmentScore(int, int);
-    int GetTestScores(int);
-    int GetFinalExamScores(int);
+    int GetTestScores(int, int);
+    int GetFinalExamScores(int, int);
 };
 
 Student::Student() {
+    arraySize = 0;
     studentName = " ";
     studentIDNumber = 0;
 }
@@ -44,8 +45,8 @@ void Student::PutIDNumber(int num) {
     studentIDNumber = num;
 }
 
-void Student::PutAssignmentScores(int score, int assignmentNumber, int numberOfAssignmnets) {
-    arraySize = numberOfAssignmnets;
+void Student::PutAssignmentScores(int score, int assignmentNumber, int numberOfAssignments) {
+    arraySize = numberOfAssignments;
     studentAssignmentScores[assignmentNumber] = score;
 }
 
@@ -67,3 +68,20 @@ int Student::GetIDNumber() {
     return studentIDNumber;
 }
 
+int Student::GetAssignmentScore(int size, int assignmentNumber) {
+    arraySize = size;
+    int score = studentAssignmentScores[assignmentNumber];
+    return score;
+}
+
+int Student::GetTestScores(int size, int testNumber) {
+    arraySize = size;
+    int score = studentAssignmentScores[testNumber];
+    return score;
+}
+
+int Student::GetFinalExamScores(int size, int finalExamNumber) {
+    arraySize = size;
+    int score = studentAssignmentScores[finalExamNumber];
+    return score;
+}
