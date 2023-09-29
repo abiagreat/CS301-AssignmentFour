@@ -127,26 +127,31 @@ int main() {
                 break;
             case 'A':
             case 'a': {
-                // i use brackets here so that the program will allow me to initialize my integer variables
+                // I use brackets here so that the program will allow me to initialize my integer variables
                 // inside of this case
+
+                // create new student object
+                Student student;
+
+
                 cout << endl << "*** You have selected to add a new student. ***" << endl;
                 outputFile << endl << "Initializing student data..." << endl;
 
                 int studentIDNumber;
-                int repeatSwitchCase = 1;
-                while (repeatSwitchCase != 0) {
-                    cin.ignore();
-                    cout << "Enter the student's first and last name seperated by a space: ";
-                    getline(cin, studentName);
-                    cout << "Enter the student's ID number: ";
-                    cin >> studentIDNumber;
 
-                    outputFile << "Student name: " << studentName << endl;
-                    outputFile << "Student ID number: " << studentIDNumber << endl;
+                cin.ignore();
+                cout << "Enter the student's first and last name seperated by a space: ";
+                getline(cin, studentName);
+                cout << "Enter the student's ID number: ";
+                cin >> studentIDNumber;
 
-                    cout << "Enter another student name? Enter 1 for yes or 0 for no: ";
-                    cin >> repeatSwitchCase;
-                }
+                student.PutName(studentName);
+                student.PutIDNumber(studentIDNumber);
+
+                outputFile << "Student name: " << student.GetName() << endl;
+                outputFile << "Student ID number: " << student.GetIDNumber() << endl;
+
+
 
                 cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
                 cin >> displayCommandMenu;
@@ -187,27 +192,23 @@ int main() {
             }
             case 'T':
             case 't': {
-                // i use brackets here so that the program will allow me to initialize my integer variables
+                // I use brackets here so that the program will allow me to initialize my integer variables
                 // inside of this case
                 int testNumber;
-                int repeatSwitchCase = 1;
 
 
                 cout << endl << "*** You have selected to record test grades for all students. ***" << endl;
-                while (repeatSwitchCase != 0) {
-                    cout << "Enter the test number for which you will enter a grade: ";
+
+                cout << "Enter the test number for which you will enter a grade: ";
+                cin >> testNumber;
+                // verify that the user entered a valid test number. a valid test number is
+                // one that is less than numTest, and that has not been previously recorded
+                while (testNumber > numTests || testNumber < 0) {
+                    cout << "!! Error: Invalid test number. You cannot input a number less than zero or a number " << endl
+                         << "greater than the number of tests you have assigned to your students. Try again."
+                         << endl;
+                    cout << "Enter the testNumber for which you will enter a grade: ";
                     cin >> testNumber;
-                    // verify that the user entered a valid test number. a valid test number is
-                    // one that is less than numTest, and that has not been previously recorded
-                    while (testNumber > numTests || testNumber < 0) {
-                        cout << "!! Error: Invalid test number. You cannot input a number less than zero or a number " << endl
-                             << "greater than the number of tests you have assigned to your students. Try again."
-                             << endl;
-                        cout << "Enter the testNumber for which you will enter a grade: ";
-                        cin >> testNumber;
-                    }
-                    cout << "Enter the score for a different number? Enter 1 if yes and 0 if no: ";
-                    cin >> repeatSwitchCase;
                 }
 
 
