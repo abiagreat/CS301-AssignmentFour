@@ -21,8 +21,7 @@ private:
     int *studentTestScores = new int[arraySize];
     int *studentFinalExamScores = new int[arraySize];
 public:
-    Student();
-    void PutName(string);
+void PutName(string);
     void PutIDNumber(int);
     void PutAssignmentScores(int, int, int);
     void PutTestScores(int, int, int);
@@ -32,6 +31,20 @@ public:
     int GetAssignmentScore(int, int);
     int GetTestScores(int);
     int GetFinalExamScores(int);
+    Student();
+Student::Student() {
+    arraySize = 0;
+    studentName = " ";
+    studentIDNumber = 0;
+    studentAssignmentScores = nullptr;
+    studentTestScores = nullptr;
+    studentFinalExamScores = nullptr;
+    }
+Student::~Student() {
+    delete[] studentAssignmentScores;
+    delete[] studentTestScores;
+    delete[] studentFinalExamScores;
+    }
 };
 
 #endif //CS301_ASSIGNMENTFOUR_STUDENT_H
