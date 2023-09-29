@@ -32,6 +32,8 @@ void PutName(string);
     int GetTestScores(int);
     int GetFinalExamScores(int);
     Student();
+};
+
 Student::Student() {
     arraySize = 0;
     studentName = " ";
@@ -40,11 +42,11 @@ Student::Student() {
     studentTestScores = nullptr;
     studentFinalExamScores = nullptr;
     }
+
 Student::~Student() {
     delete[] studentAssignmentScores;
     delete[] studentTestScores;
     delete[] studentFinalExamScores;
     }
-};
 
 #endif //CS301_ASSIGNMENTFOUR_STUDENT_H
