@@ -6,13 +6,9 @@ CS 301-03
 Assignment 4 Project Plan
 
 Assignment 4 will include Student.cpp, Student.h, main.cpp, Grades.out, and Grades.dat files.
-
 We will test our test driver for all the possible outputs.
-
-
 We expect that based on the command instructions, the output would be displayed accordingly. 
 
- 
 The logic will be the following:
 
 //Team 3: Abia Khan and Mario Salinas
@@ -224,12 +220,11 @@ int main() {
 }
 
 
-Test Cases: 11
-We tested every possible output. 
-
+Test Cases: 11 
+We tried to test every possible output. 
 
 class names: CompareStudentsByName, CompareStudentsByID, Student
 
-functions: for, while, is-else, switch (case statements), inputFile, outputFile 
+functions: for, while, if-else, switch (case statements), inputFile, outputFile 
 
 
