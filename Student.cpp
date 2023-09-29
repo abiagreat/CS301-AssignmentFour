@@ -47,17 +47,20 @@ void Student::PutIDNumber(int num) {
 
 void Student::PutAssignmentScores(int score, int assignmentNumber, int numberOfAssignments) {
     arraySize = numberOfAssignments;
+    studentAssignmentScores = new int[arraySize]; // Allocate memory for assignment scores
     studentAssignmentScores[assignmentNumber] = score;
 }
 
 void Student::PutTestScores(int score, int testNumber, int numberOfTests) {
     arraySize = numberOfTests;
-    studentAssignmentScores[testNumber] = score;
+    studentTestScores = new int[arraySize]; // Allocate memory for test scores
+    studentTestScores[testNumber] = score;
 }
 
 void Student::PutFinalExamScores(int score, int finalExamNumber, int numberOfFinalExams) {
     arraySize = numberOfFinalExams;
-    studentAssignmentScores[finalExamNumber] = score;
+    studentFinalExamScores = new int[arraySize]; // Allocate memory for final exam scores
+    studentFinalExamScores[finalExamNumber] = score;
 }
 
 string Student::GetName() {
