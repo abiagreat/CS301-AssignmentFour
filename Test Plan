@@ -16,6 +16,214 @@ We expect that based on the command instructions, the output would be displayed 
  
 The logic will be the following:
 
+//Team 3: Abia Khan and Mario Salinas
+//NetID: ac6212 and ry7931 
+//CS 301-03 
+//9/26/23 
+
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <algorithm> // for sorting
+
+using namespace std;
+
+#include "Student.h"
+
+// Function to compare students by name for sorting
+bool CompareStudentsByName
+
+// Function to compare students by ID for sorting
+bool CompareStudentsByID
+
+int main() {
+    string inputFileName, outputFileName;
+    ifstream inputFile;
+    ofstream outputFile;
+    int displayCommandMenu = 1;    // choose whether to display the processing commands menu
+    char command = 'I';         // operation to be executed. initialized to 'I' as a dummy place-holder
+
+    cout << "Enter the name of the input file (hint: it's Grades.trn): ";
+    cin >> inputFileName;
+    inputFile.open(inputFileName.c_str());
+
+    cout << "Enter the name of the output file (hint: it's Grades.dat): ";
+    cin >> outputFileName;
+    outputFile.open(outputFileName.c_str());
+
+    if (!inputFile.good()) {
+        cout << "I/O error. Can't find the input file! \n";
+        exit;
+    }
+
+    // test output file
+    outputFile << "*** Semester Grade Book ***" << endl << endl;
+
+    while (displayCommandMenu != 0) {
+        // define variables that will be used under the scope of this while loop
+        string studentName;
+
+        cout << "S: Set up for new semester." << endl
+             << "A: Add a new student." << endl
+             << "P: Record programming assignment grade for all students." << endl
+             << "T: Record test grade for all students." << endl
+             << "F: Record Final exam grade for all students." << endl
+             << "C: Change a grade for a new particular student." << endl
+             << "G: Calculate final grade." << endl
+             << "O: Output the grade data." << endl
+             << "Q: Quit." << endl
+             << "Enter your single letter-command: " << endl;
+        cin >> command;
+
+        //Each case or command instruction
+        switch (command) {
+            case 'S':
+            case 's':
+                break;
+            case 'A':
+            case 'a': {
+                // i use brackets here so that the program will allow me to initialize my integer variables
+                // inside of this case
+                break;
+            }
+            case 'P':
+            case 'p':
+                {
+              cout << endl << "*** You have selected to record programming assignment grades for all students. ***" << endl;
+
+             // Add code here to prompt the user for the program number to be recorded.
+
+            // Verify that the entered program number is valid.
+    
+            // Now, loop through each student and record their grade for the selected program.
+            for (int studentIndex = 0; studentIndex < numberOfStudents; studentIndex++) {
+            // Prompt for the student's grade for the specified program.
+                int programGrade;
+                cout << "Enter the grade for " << students[studentIndex].studentName << " for program " << programNumber << ": ";
+                cin >> programGrade;
+
+                 // Assign the grade to the appropriate student's record.
+
+                cout << "Programming assignment grades have been recorded for all students." << endl;
+        
+                cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
+                cin >> displayCommandMenu;
+                break;
+            }
+            case 'T':
+            case 't': {
+                // i use brackets here so that the program will allow me to initialize my integer variables
+                // inside of this case
+                
+                    // verify that the user entered a valid test number. a valid test number is
+                    // one that is less than numTest, and that has not been previously recorded
+                    
+                    cout << "Enter the score for a different number? Enter 1 if yes and 0 if no: ";
+                    cin >> repeatSwitchCase;
+                }
+
+
+                cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
+                cin >> displayCommandMenu;
+                break;
+            }
+            case 'F':
+            case 'f':
+                break;
+            case 'C':
+            case 'c':
+            {
+                // Prompt the user to enter the student number.
+
+                // Verify that the entered student number is valid.
+
+                // Prompt the user to specify the type of grade to change (P, T, or F).
+
+                // Validate the entered grade type.
+
+                // Prompt the user to enter the new grade.
+
+                // Depending on the grade type, update the corresponding grade for the selected student.
+                // Programming assignment grade
+                // Test grade
+                // You may need to prompt for the test number as well.
+                // Similar to how you did it for 'P'.
+                    // Final exam grade
+                // You may need to prompt for the final exam grade here.
+                
+                cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
+                cin >> displayCommandMenu;
+                 break;
+            case 'G':
+            case 'g':
+             // Loop through each student and calculate the final grade.
+        // Initialize variables to store the sum of program and test grades.
+
+        // Calculate the sum of program grades.
+        // Calculate the sum of test grades.
+
+        // Calculate the final grade as the weighted sum of program and test grades.
+
+        // Store the final grade in the student's record.
+
+        cout << "Final grades have been calculated and stored for all students." << endl;
+
+         cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
+         cin >> displayCommandMenu;
+         break;
+            case 'O':
+            case 'o':
+                // Open the "Grades.out" file for writing
+
+                // Sort the students based on user choice (name or ID)
+                char sortChoice;
+                cout << "Sort by (N)ame or (I)D? ";
+                cin >> sortChoice;
+
+                    // Sort by name
+                    // Sort by ID
+
+                // Output the sorted data to "Grades.out"
+
+                    // Can add more code here to output other student data (grades, etc.)
+
+                cout << "Grade data has been written to Grades.out." << endl;
+
+                outFile.close();
+                break;
+            case 'Q':
+            case 'q':
+                // Save all student records to "Grades.dat"
+                ofstream outputFile("Grades.dat");
+
+                if (!outputFile.is_open()) {
+                    cout << "Error: Unable to open Grades.dat for writing." << endl;
+                    break;
+                }
+
+                // Write student records to the "Grades.dat" file
+                for (const Student& student : students) {
+                    outputFile << "Name: " << student.GetName() << endl;
+                    outputFile << "ID Number: " << student.GetIDNumber() << endl;
+
+                    // Can add more code here to save other student data (grades, etc.)
+
+                    outputFile << endl;
+                }
+
+                cout << "Student records have been saved to Grades.dat." << endl;
+
+                outputFile.close();
+
+                displayCommandMenu = 0; // Exit the program
+                break;
+        }
+    }
+    return 0;
+}
+
 
 Test Cases: 
 We tested 
