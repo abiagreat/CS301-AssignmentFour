@@ -5,13 +5,13 @@ CS 301-03
 
 Assignment 4 Project Plan
 
-Assignment 4 will include  
+Assignment 4 will include Student.cpp, Student.h, main.cpp, Grades.out, and Grades.dat files.
 
 
-We will test our
+We will test our test driver for all the possible outputs.
 
 
-We expect that 
+We expect that based on the command instructions, the output would be displayed accordingly. 
 
  
 The logic will be the following:
