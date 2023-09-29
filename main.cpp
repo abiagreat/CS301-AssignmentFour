@@ -28,6 +28,9 @@ int main() {
     string inputFileName, outputFileName;
     ifstream inputFile;
     ofstream outputFile;
+    // Define and initialize numberOfStudents and students vector
+    int numberOfStudents = 0;
+    vector<Student> students;
     int displayCommandMenu = 1;    // choose whether to display the processing commands menu
     char command = 'I';         // operation to be executed. initialized to 'I' as a dummy place-holder
 
@@ -62,7 +65,7 @@ int main() {
              << "Q: Quit." << endl
              << "Enter your single letter-command: " << endl;
         cin >> command;
-
+        
         switch (command) {
             case 'S':
             case 's':
