@@ -215,17 +215,39 @@ int main() {
                 cin >> displayCommandMenu;
                 break;
             }
-            case 'F':
-            case 'f':
-                cout << endl << "*** You have selected to record final exam grades for all students. ***" << endl;
+           case 'F':
+           case 'f':
+        {
+        cout << endl << "*** You have selected to record final exam grades for all students. ***" << endl;
 
+    // Loop through each student and record their final exam grade.
+    for (int studentIndex = 0; studentIndex < numberOfStudents; studentIndex++) {
+        // Check if final exam grade has already been recorded.
+        if (students[studentIndex].finalExamGrade >= 0) {
+            cout << "Final exam grade for " << students[studentIndex].studentName << " already recorded." << endl;
+        } else {
+            // Prompt for the final exam grade.
+            int finalExamGrade;
+            cout << "Enter final exam grade for " << students[studentIndex].studentName << ": ";
+            cin >> finalExamGrade;
 
-                cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
-                cin >> displayCommandMenu;
-                break;
+            // Validate the entered grade.
+            while (finalExamGrade < 0 || finalExamGrade > 100) {
+                cout << "!! Error: Invalid final exam grade. Enter a valid grade between 0 and 100: ";
+                cin >> finalExamGrade;
+            }
+
+            // Assign the grade to the appropriate student's record.
+            students[studentIndex].finalExamGrade = finalExamGrade;
+            cout << "Final exam grade recorded for " << students[studentIndex].studentName << endl;
+        }
+    }
+
+        cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
+        cin >> displayCommandMenu;
+        break;
             case 'C':
             case 'c':
-            {
                 cout << endl << "*** You have selected to change a grade for a particular student. ***" << endl;
 
                 // Prompt the user to enter the student number.
@@ -273,7 +295,6 @@ int main() {
                 cout << "Return to the command instruction menu? Enter 1 if yes, enter 0 if no: ";
                 cin >> displayCommandMenu;
                  break;
-                        }
             case 'G':
             case 'g':
     cout << endl << "*** You have selected to calculate students' final grade. ***" << endl;
