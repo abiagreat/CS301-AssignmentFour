@@ -225,12 +225,12 @@ int main() {
 }
 
 
-Test Cases: 
-We tested 
+Test Cases: 11
+We tested every possible output. 
 
 
-class names: 
+class names: CompareStudentsByName, CompareStudentsByID, Student
 
-functions: 
+functions: for, while, is-else, switch (case statements), inputFile, outputFile 
 
 
